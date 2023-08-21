@@ -79,11 +79,12 @@ export default function ToDo() {
                         </button> */}
                         <button
                           className="item list btnDelete"
-                          onClick={() =>
+                          onClick={(e) => {
+                            e.preventDefault();
                             setUpdates(
                               updates.filter((a) => a.id !== update.id)
                             )
-                          }
+                          }}
                         >
                           ❌
                         </button>
