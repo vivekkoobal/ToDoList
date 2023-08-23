@@ -17,7 +17,7 @@ let nextId = 0;
 export default function ToDo() {
   const [inputs, setInputs] = useState("");
   const [updates, setUpdates] = useState(localItems());
-  const [isBlank, setIsBlank] = useState("");
+  const [isBlank, setIsBlank] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("TO_DO_ITEMS", JSON.stringify(updates));
@@ -25,13 +25,14 @@ export default function ToDo() {
 
   const handleInput = (e) => {
     setInputs(e.target.value);
+    setIsBlank("");
   };
 
   const handleAdd = (e) => {
     e.preventDefault();
 
     if (inputs.trim().length == "0") {
-      setIsBlank("Invalid input, please write again");
+      setIsBlank("Invalid input, please type again!");
     } else {
       setUpdates([
         {
@@ -83,7 +84,7 @@ export default function ToDo() {
                             e.preventDefault();
                             setUpdates(
                               updates.filter((a) => a.id !== update.id)
-                            )
+                            );
                           }}
                         >
                           ❌

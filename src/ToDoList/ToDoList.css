@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   padding: 10px;
-  margin-top:100px;
+  margin-top:50px;
  }
 
 .todo-list {
@@ -42,6 +42,12 @@ input {
 .todo-form {
   padding: 100px;
   border: 10px solid #6564e3;
+}
+
+.container{
+  align-items: center;
+  margin-left: 40px;
+  margin-top: 25px;
 }
 
 ol li {
