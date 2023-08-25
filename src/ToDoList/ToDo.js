@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../ToDoList/ToDoList.css";
 import toDoIcon from "../images/toDoIcon.png";
 
@@ -18,10 +18,15 @@ export default function ToDo() {
   const [inputs, setInputs] = useState("");
   const [updates, setUpdates] = useState(localItems());
   const [isBlank, setIsBlank] = useState(false);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     localStorage.setItem("TO_DO_ITEMS", JSON.stringify(updates));
   }, [updates]);
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
   const handleInput = (e) => {
     setInputs(e.target.value);
@@ -56,6 +61,7 @@ export default function ToDo() {
             </div>
             <label>
               <input
+                ref={inputRef}
                 className="todoInput"
                 type="text"
                 placeholder="Write item Name"
@@ -67,38 +73,37 @@ export default function ToDo() {
                 +
               </button>
               <p className="errorMessage">{isBlank}</p>
+            </label>
+          </div>
+          {/* <h2>Current Items in List</h2> */}
+          <div className="container ">
+            <ol>
+              {updates.map((update) => (
+                <li key={update.key} className="item">
+                  {update.name}
 
-              <div className="container">
-                <ol>
-                  {updates.map((update) => (
-                    <li key={update.key} className="item">
-                      {update.name}
-
-                      <div>
-                        {/* <button onClick={handleDone} className="item btnDone">
+                  <div>
+                    {/* <button onClick={handleDone} className="item btnDone">
                           ✔{" "}
                         </button> */}
-                        <button
-                          className="item list btnDelete"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setUpdates(
-                              updates.filter((a) => a.id !== update.id)
-                            );
-                          }}
-                        >
-                          ❌
-                        </button>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </label>
-            {updates.length === 0 && (
-              <p className="emptyList">No items to display</p>
-            )}
+                    <button
+                      className="item list btnDelete"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setUpdates(updates.filter((a) => a.id !== update.id));
+                      }}
+                    >
+                      ❌
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
+
+          {updates.length === 0 && (
+            <p className="emptyList">No items to display</p>
+          )}
         </div>
       </div>
     </div>

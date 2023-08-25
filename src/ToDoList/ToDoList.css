@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   padding: 10px;
-  margin-top:50px;
+  margin-top:20px;
  }
 
 .todo-list {
@@ -40,7 +40,7 @@ input {
 }
 
 .todo-form {
-  padding: 100px;
+  padding: 40px;
   border: 10px solid #6564e3;
 }
 
